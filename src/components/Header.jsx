@@ -1,16 +1,20 @@
-import React from "react";
+import React from 'react'
 import { Nav, Container } from "react-bootstrap";
 
-const Header = () => {
-  const date = new Date(); //JavaScript Date object.
+const header = () => {
+
+    const date = new Date();
+
   return (
-    <Nav className="p-2 background">
+    <div>
+       <Nav className="p-2 background">
       <Container className="d-flex justify-content-between align-items-center">
-        <h3 className="fw-bold  title"> Habit Tracker </h3>
+        <h3 className="fw-bold  title">Habit Tracker</h3>
         <span className="currDate">{date.toDateString()}</span>
       </Container>
     </Nav>
-  );
-};
+    </div>
+  )
+}
 
-export default Header;
+export default header

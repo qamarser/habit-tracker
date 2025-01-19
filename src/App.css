@@ -1,0 +1,17 @@
+.background {  
+    background-color: black;
+    background-size: 90%;
+    background-position: -350% 30%;
+  }
+  
+  .title {
+    font-size: 50px;
+    font-style: italic;
+    color: orange;
+    font-weight: 600;
+  }
+  
+  .currDate {
+    font-size: 25px;
+    color: orange;
+  }
