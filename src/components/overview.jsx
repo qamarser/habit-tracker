@@ -1,16 +1,75 @@
-/* overview of the user's habit*/
+// overview of the user's habit
 
 import React from 'react';
 import createHabit from './createHabit';
 import { useSelector, useDispatch } from 'react-redux';
-import {} from '../features/habitSlice'
+import {Row, Col, Listgroup, Button } from 'bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import {deleteHabit} from '../features/habitSlice';
 
 const overview = () => {
-  return (
-    <div>
-      
-    </div>
-  );
-}
+    const [modalShow, SetmodalShow] = react.useState(false); /*the modal does'nt show initially*/
 
-export default overview;
+    const dispatch = useDispatch
+    const {habits} =useSelector((state)=> state.allhabits); /* allow component to access date stored in redux*/
+
+    const deletehandler = (name) => {     /*responsible for dispatching an action to delete a habit from the Redux store*/
+        dispatch(deleteHabit(name));
+    };
+
+    return (
+        <>
+          <Row>
+            <Col md={2} className="onMobile">
+              <i className="fa-regular fa-calendar-minus"></i>
+            </Col>
+            <Col md={4} className="onMobile">
+              <h4>Habits</h4>
+            </Col>
+          </Row>
+          <ListGroup>
+            {habits.map((habit, index) => (
+              <ListGroup.Item
+                key={index}
+                className="gradient mb-1 rounded habit-container"
+              >
+                <Row>
+                  <Col md={2} className="icons">
+                    {" "}
+                    <i className="fa-brands fa-canadian-maple-leaf"></i>
+                  </Col>
+                  <Col md={8} className="habit-title">
+                    {habit.title}
+                  </Col>
+                  <Col md={1} className="icons">
+                    <i
+                      className="fa-solid fa-trash"
+                      style={{ fontSize: "12px" }}
+                      onClick={() => deleteHandler(habit.title)}
+                    ></i>
+                  </Col>
+                </Row>
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+    
+          <Row>
+            <Col className="d-flex justify-content-center">
+              <Button
+                type="button"
+                className="mt-3 mobile"
+                onClick={() => setModalShow(true)}
+              >
+                <i className="fa-solid fa-circle-plus"></i> &nbsp;&nbsp; New Habit
+              </Button>
+              <CreateHabit show={modalShow} onHide={() => setModalShow(false)} />
+            </Col>
+          </Row>
+        </>
+      );
+    };
+    
+    export default overview;
+
+
+
