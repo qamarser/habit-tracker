@@ -1,0 +1,38 @@
+/* CSS for heading on Mobile Screens */
+.onMobile i {
+    color: rgb(80, 65, 197);
+    font-size: 25px;
+  }
+  
+  .onMobile h4 {
+    color: white;
+    font-size: 25px;
+    font-weight: 600;
+  }
+  
+  .mobile {
+    background-color: green;
+  }
+  
+  @media screen and (max-width: 600px) {
+    .onMobile {
+      display: inline-block;
+      width: 30px;
+    }
+  
+    .icons {
+      display: inline-block;
+      width: 30px;
+    }
+    .habit-title {
+      display: inline-block;
+      width: 100px;
+    }
+    .habit-container {
+      width: 50vw;
+    }
+    .mobile {
+      margin-right: auto;
+      font-size: 14px;
+    }
+  }
