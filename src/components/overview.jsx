@@ -3,7 +3,7 @@
 import React from 'react';
 import createHabit from './createHabit';
 import { useSelector, useDispatch } from 'react-redux';
-import {Row, Col, Listgroup, Button } from 'bootstrap';
+import {Row, Col, Listgroup, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {deleteHabit} from '../features/habitSlice';
 
