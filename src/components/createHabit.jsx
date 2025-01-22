@@ -50,6 +50,6 @@ return (
   )
 }
 
-export default CreateHabit
+export default CreateHabit;
 
 
