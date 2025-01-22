@@ -3,7 +3,10 @@
     background-size: 90%;
     background-position: -350% 30%;
   }
-  
+  /* body {
+    background: rgb(0,0,0);
+background: radial-gradient(circle, rgba(0,0,0,1) 100%, rgba(0,212,255,1) 100%, rgba(1,0,5,1) 100%);
+} */
   .title {
     font-size: 50px;
     font-style: italic;
@@ -15,3 +18,11 @@
     font-size: 25px;
     color: orange;
   }
+
+
+  .tag{
+    color: rgb(0, 0, 0);
+  }
+
+
+  
