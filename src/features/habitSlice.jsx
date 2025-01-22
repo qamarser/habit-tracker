@@ -24,7 +24,7 @@ export const details = [
     name: "habits",
     initialState,
     reducers: {
-        addHabit: (state, { payload }) => {
+      addHabit: (state, { payload }) => {
             state.habits = [...state.habits, payload];
             habits = [...habits, payload];
             window.localStorage.setItem("newHabits", JSON.stringify(habits));
@@ -50,8 +50,10 @@ export const details = [
         },
       });
       
-      console.log(habitsSlice);
+      console.log(habitSlice);
       
-      export const { addHabit, deleteHabit, changeStatus } = habitsSlice.actions;
+      export const { addHabit, deleteHabit, changeStatus } = habitSlice.actions;
       
-      export default habitsSlice.reducer;
+      export default habitSlice.reducer;
+
+      

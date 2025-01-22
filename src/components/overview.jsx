@@ -1,11 +1,12 @@
 // overview of the user's habit
 
 import React from 'react';
-import createHabit from './createHabit';
+import {createHabit} from './createHabit';
 import { useSelector, useDispatch } from 'react-redux';
 import {Row, Col, Listgroup, Button } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
 import {deleteHabit} from '../features/habitSlice';
+import './overview.css'
+
 
 const overview = () => {
     const [modalShow, SetmodalShow] = react.useState(false); /*the modal does'nt show initially*/
@@ -27,9 +28,9 @@ const overview = () => {
               <h4>Habits</h4>
             </Col>
           </Row>
-          <ListGroup>
+          <Listgroup>
             {habits.map((habit, index) => (
-              <ListGroup.Item
+              <Listgroup.Item
                 key={index}
                 className="gradient mb-1 rounded habit-container"
               >
@@ -45,24 +46,24 @@ const overview = () => {
                     <i
                       className="fa-solid fa-trash"
                       style={{ fontSize: "12px" }}
-                      onClick={() => deleteHandler(habit.title)}
+                      onClick={() => deletehandler(habit.title)}
                     ></i>
                   </Col>
                 </Row>
-              </ListGroup.Item>
+              </Listgroup.Item>
             ))}
-          </ListGroup>
+          </Listgroup>
     
           <Row>
             <Col className="d-flex justify-content-center">
               <Button
                 type="button"
                 className="mt-3 mobile"
-                onClick={() => setModalShow(true)}
+                onClick={() => SetmodalShow(true)}
               >
                 <i className="fa-solid fa-circle-plus"></i> &nbsp;&nbsp; New Habit
               </Button>
-              <CreateHabit show={modalShow} onHide={() => setModalShow(false)} />
+              <createHabit show={modalShow} onHide={() => SetmodalShow(false)} />
             </Col>
           </Row>
         </>
