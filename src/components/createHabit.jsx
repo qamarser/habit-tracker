@@ -1,16 +1,19 @@
 import {useState}from 'react';
-import { Modal, Button, form, ModalDialog, ModalBody, Form } from 'react-bootstrap';
+import { Modal, Button, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { addhabit } from '../features/habitSlice';
+import { addHabit } from '../features/habitSlice';
 import { details } from '../features/habitSlice';
 
 const CreateHabit = (props) => {
     const dispatch = useDispatch()
     const [title, setTitle] = useState('')
+      const [description, setDescription] = useState('')
+
+  
 
 // handle new habits
 const AddHabitHandler = () => {
-    dispatch(addhabit({ title, description, details}))
+    dispatch(addHabit({ title, description, details}))
     props.onhide()  /* hides a modal after a new habit is added */
 }
 return (
@@ -25,7 +28,7 @@ return (
         type='text'
         placeholder='enter title'
         value={title}
-        autofocus={true}
+        autoFocus={true}
         required={true}
         onChange={(e) => setTitle(e.target.value)}>
         </Form.Control>

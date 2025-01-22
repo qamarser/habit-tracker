@@ -1,6 +1,6 @@
 import { ListGroup} from 'react-bootstrap'
 import { useSelector } from 'react-redux'
-import Habitdetails from './Habitdetails'
+import HabitDetails from './Habitdetails'
 
 const HabitDisplay = () => {
   const { habits } = useSelector((state) => state.allHabits)

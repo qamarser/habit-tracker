@@ -1,18 +1,17 @@
 // overview of the user's habit
-
 import React from 'react';
-import {createHabit} from './createHabit';
-import { useSelector, useDispatch } from 'react-redux';
-import {Row, Col, Listgroup, Button } from 'react-bootstrap';
+import CreateHabit from './createHabit';
+import {useSelector,useDispatch} from 'react-redux';
+import {Row, Col, ListGroup, Button} from 'react-bootstrap';
 import {deleteHabit} from '../features/habitSlice';
 import './overview.css'
 
 
-const overview = () => {
-    const [modalShow, SetmodalShow] = react.useState(false); /*the modal does'nt show initially*/
+const Overview = () => {
+    const [modalShow, SetmodalShow] = React.useState(false); /*the modal does'nt show initially*/
 
-    const dispatch = useDispatch
-    const {habits} =useSelector((state)=> state.allhabits); /* allow component to access date stored in redux*/
+    const dispatch = useDispatch();
+    const { habits } =useSelector((state)=> state.allHabits); /* allow component to access date stored in redux*/
 
     const deletehandler = (name) => {     /*responsible for dispatching an action to delete a habit from the Redux store*/
         dispatch(deleteHabit(name));
@@ -28,9 +27,9 @@ const overview = () => {
               <h4>Habits</h4>
             </Col>
           </Row>
-          <Listgroup>
+          <ListGroup>
             {habits.map((habit, index) => (
-              <Listgroup.Item
+              <ListGroup.Item
                 key={index}
                 className="gradient mb-1 rounded habit-container"
               >
@@ -50,9 +49,9 @@ const overview = () => {
                     ></i>
                   </Col>
                 </Row>
-              </Listgroup.Item>
+              </ListGroup.Item>
             ))}
-          </Listgroup>
+          </ListGroup>
     
           <Row>
             <Col className="d-flex justify-content-center">
@@ -63,14 +62,14 @@ const overview = () => {
               >
                 <i className="fa-solid fa-circle-plus"></i> &nbsp;&nbsp; New Habit
               </Button>
-              <createHabit show={modalShow} onHide={() => SetmodalShow(false)} />
+              <CreateHabit show={modalShow} onHide={() => SetmodalShow(false)} />
             </Col>
           </Row>
         </>
       );
     };
     
-    export default overview;
+    export default Overview;
 
 
 

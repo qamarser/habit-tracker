@@ -1,8 +1,10 @@
 import { Fragment } from "react";  //fragment allows us to return multiple elements from a component
 import { Row, Col } from "react-bootstrap";
 import { useDispatch } from "react-redux";  // hook to send actions to Redux to update the application state.
-// import { changeStatus } from "../features/habitsSlice.jsx";
+// import { changeStatus } from "../features/habitSlice.jsx";
 import { changeStatus } from "../features/habitSlice";
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 const HabitDetails = ({ habit, habit: { details } }) => {  //habit.details: An array of objects representing the status for each day of the week.
     const dispatch = useDispatch();
