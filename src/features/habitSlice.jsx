@@ -13,7 +13,15 @@ export const details = [
 // Load habits from local storage if available, otherwise set default habit
 const habitsFromStorage = localStorage.getItem("newHabits")
   ? JSON.parse(localStorage.getItem("newHabits"))
-  : [{ title: "Wake Up", description: "wake up at 5:45am", details }];
+  : [
+      {
+        title: "Wake Up",
+        description: "wake up at 5:45am",
+        details,
+        completedDays: 0, // Ensure it's initialized
+        showCongrats: false, // Ensure the congrats flag is initialized
+      },
+    ];
 
 let habits = [...habitsFromStorage];
 
@@ -44,13 +52,31 @@ const habitSlice = createSlice({
     changeStatus: (state, { payload }) => {
       state.habits.forEach((habit) => {
         if (habit.title === payload.title) {
+          let completedCount = habit.completedDays; // Start with current completedDays count
+          
           habit.details.forEach((detail) => {
             if (detail.day === payload.details[0].day) {
-              detail.status = payload.details[0].status;
+              const oldStatus = detail.status; // Save the old status
+              detail.status = payload.details[0].status; // Update the day's status
+
+              // Only increment completedDays if the status is changed to "done"
+              if (detail.status === "done" && oldStatus !== "done") {
+                completedCount++; // Increment if we mark it as "done"
+              }
+
+              // Do nothing to completedDays if we change it to "none" or "fail"
+              // We don't decrement completedDays if the status was previously "done"
             }
           });
+
+          // Update completedDays without limiting it to 21
+          habit.completedDays = completedCount;
+
+          // If the habit reaches 21 days, show congratulations
+          habit.showCongrats = habit.completedDays >= 21;
         }
       });
+
       window.localStorage.setItem("newHabits", JSON.stringify(state.habits));
     },
   },
