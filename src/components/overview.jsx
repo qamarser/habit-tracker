@@ -21,7 +21,8 @@ const Overview = () => {
         <>
           <Row>
             <Col md={2} className="onMobile">
-              <i className="fa-regular fa-calendar-minus"></i>
+              <i className="fa-regular fa-calendar-minus"
+               style={{color: "#EF10D1",}}></i>
             </Col>
             <Col md={4} className="onMobile">
               <h4>Habits</h4>
@@ -36,16 +37,16 @@ const Overview = () => {
                 <Row>
                   <Col md={2} className="icons">
                     {" "}
-                    <i className="fa-brands fa-canadian-maple-leaf"></i>
+                    <i className="fa-brands fa-canadian-maple-leaf" style={{color: "#EF10D1", }} ></i>
                   </Col>
-                  <Col md={8} className="habit-title">
+                  <Col md={8} className="habit-title habit-name ">
                     {habit.title}
                   </Col>
                   <Col md={1} className="icons">
                     <i
-                      className="fa-solid fa-trash"
-                      style={{ fontSize: "12px" }}
-                      onClick={() => deletehandler(habit.title)}
+                      className="fa-solid fa-trash" 
+                      style={{color: "#EF10D1", fontSize: "12px" , cursor: "pointer",}} 
+                       onClick={() => deletehandler(habit.title)}
                     ></i>
                   </Col>
                 </Row>
@@ -58,9 +59,10 @@ const Overview = () => {
               <Button
                 type="button"
                 className="mt-3 mobile"
+                style={{color: "#e41aff", border:"none" ,  cursor: "pointer",}}
                 onClick={() => SetmodalShow(true)}
               >
-                <i className="fa-solid fa-circle-plus"></i> &nbsp;&nbsp; New Habit
+                <i className="fa-solid fa-circle-plus" style={{color: "#e41aff",}} ></i> &nbsp;&nbsp; New Habit
               </Button>
               <CreateHabit show={modalShow} onHide={() => SetmodalShow(false)} />
             </Col>
