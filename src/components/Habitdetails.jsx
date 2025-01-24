@@ -72,7 +72,7 @@ const HabitDetails = ({ habit, habit: { details } }) => {
 
             {detail.status === "fail" && (
               <i
-                className="fa-lg fa-solid fa-circle-xmark fail"
+                className="fa-lg fa-solid fa-circle-xmark fail " 
                 onClick={() => failStatusHandler([habit.title, detail.day])}
               ></i>
             )}
@@ -80,13 +80,14 @@ const HabitDetails = ({ habit, habit: { details } }) => {
         </Fragment>
       ))}
       <Col>
-        <p>
+        <p className="days">
           Completed Days: {habit.completedDays}
         </p>
         {/* Show congratulations message when completedDays reaches or exceeds 21 */}
-        {habit.showCongrats && <p>Congratulations, you formed a habit!</p>}
+        {habit.showCongrats && <p className="congrat-mess">Congratulations, you formed a habit!</p>}
       </Col>
     </Row>
+    
   );
 };
 

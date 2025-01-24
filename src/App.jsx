@@ -35,7 +35,7 @@ function App() {
     <>
     <Header />
     <Container>
-        <Row className='mt-5'>
+        <Row className='mt-5  habit-name'>
           <Col md={3}>
             <Overview />
           </Col>

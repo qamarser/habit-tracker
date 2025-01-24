@@ -1,19 +1,23 @@
 /* CSS for heading on Mobile Screens */
 .onMobile i {
-    color: rgb(80, 65, 197);
+    /* color: rgb(80, 65, 197); */
     font-size: 25px;
   }
   
   .onMobile h4 {
-    color: white;
+    color: #EF10D1;
     font-size: 25px;
     font-weight: 600;
   }
   
   .mobile {
-    background-color: green;
+    background-color: #3D3D3D;
   }
   
+  .mobile:hover{
+    background-color: #2F2F2F;
+  }
+
   @media screen and (max-width: 600px) {
     .onMobile {
       display: inline-block;
@@ -23,7 +27,9 @@
     .icons {
       display: inline-block;
       width: 30px;
+      cursor: pointer;
     }
+    
     .habit-title {
       display: inline-block;
       width: 100px;
