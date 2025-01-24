@@ -64,21 +64,40 @@ const habitSlice = createSlice({
                 completedCount++; // Increment if we mark it as "done"
               }
 
-              // Do nothing to completedDays if we change it to "none" or "fail"
-              // We don't decrement completedDays if the status was previously "done"
-            }
-          });
+    //           // Do nothing to completedDays if we change it to "none" or "fail"
+    //           // We don't decrement completedDays if the status was previously "done"
+    //         }
+    //       });
 
-          // Update completedDays without limiting it to 21
-          habit.completedDays = completedCount;
+    //       // Update completedDays without limiting it to 21
+    //       habit.completedDays = completedCount;
 
-          // If the habit reaches 21 days, show congratulations
-          habit.showCongrats = habit.completedDays >= 21;
-        }
-      });
+    //       // If the habit reaches 21 days, show congratulations
+    //       habit.showCongrats = habit.completedDays === 21;
+    //     }
+    //   });
 
-      window.localStorage.setItem("newHabits", JSON.stringify(state.habits));
-    },
+    //   window.localStorage.setItem("newHabits", JSON.stringify(state.habits));
+    // },
+         // Decrement completedDays only if changing from "done" to another status
+         
+      }
+    });
+
+    habit.completedDays = completedCount;
+
+    // Show congrats only when completedDays reaches exactly 21
+    if (completedCount === 21 && !habit.showCongrats) {
+      alert("Congratulations, you formed a habit!");
+      habit.showCongrats = true;
+    } else if (completedCount !== 21) {
+      habit.showCongrats = false; // Reset if not at 21
+    }
+  }
+});
+
+window.localStorage.setItem("newHabits", JSON.stringify(state.habits));
+},
   },
 });
 

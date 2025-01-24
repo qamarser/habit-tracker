@@ -83,11 +83,8 @@ const HabitDetails = ({ habit, habit: { details } }) => {
         <p className="days">
           Completed Days: {habit.completedDays}
         </p>
-        {/* Show congratulations message when completedDays reaches or exceeds 21 */}
-        {habit.showCongrats && <p className="congrat-mess">Congratulations, you formed a habit!</p>}
       </Col>
     </Row>
-    
   );
 };
 
