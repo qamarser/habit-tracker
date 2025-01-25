@@ -93,3 +93,7 @@
   border-color: #EF10D1; /* Border color matches the start of the gradient */
   color: black !important; /* Change text color for better contrast */
 }
+
+.headings{
+  color: #EF10D1;
+}

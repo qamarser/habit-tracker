@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from "recharts";
 import { useNavigate } from "react-router-dom";
 import { createSelector } from 'reselect';
+import LinearChart from "./LinearChart"
 
 // Memoized selector to avoid unnecessary re-renders
 const selectHabits = (state) => state.allHabits.habits;
@@ -30,11 +31,12 @@ const PerformanceChart = () => {
   console.log("Chart Data:", chartData); // Debugging line
 
   return (
+    <div>
     <div className="container mt-5">
       <button className="btn btn-secondary mb-4" onClick={() => navigate("/")}>
         Back to Home
       </button>
-      <h1 className="mb-4">Habit Performance</h1>
+      <h1 className="mb-4 headings">Habit Performance</h1>
       <div className="chart-container">
         <BarChart width={800} height={400} data={chartData}>
           <CartesianGrid strokeDasharray="3 3" />
@@ -46,6 +48,8 @@ const PerformanceChart = () => {
           <Bar dataKey="goalReached" fill="#82ca9d" name="Goal Reached" />
         </BarChart>
       </div>
+    </div>
+    <LinearChart/>
     </div>
   );
 };
