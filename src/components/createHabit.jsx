@@ -8,8 +8,10 @@ const CreateHabit = (props) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  // handle new habits
-  const AddHabitHandler = () => {
+  // Handle new habits
+  const AddHabitHandler = (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
+
     const newHabit = {
       title,
       description,
@@ -25,8 +27,13 @@ const CreateHabit = (props) => {
       completedDays: 0, // Initialize completedDays to 0 for a new habit
       showCongrats: false, // Initialize showCongrats as false
     };
+
     dispatch(addHabit(newHabit)); // Dispatch the new habit to Redux
-    props.onhide(); // Close the modal after adding the habit
+    props.onHide(); // Close the modal after adding the habit
+
+    // Reset form fields
+    setTitle('');
+    setDescription('');
   };
 
   return (
@@ -37,37 +44,35 @@ const CreateHabit = (props) => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Dialog className="modal-sm">
-        <Modal.Body>
-          <Form onSubmit={(e) => e.preventDefault() && AddHabitHandler()}>
-            <Form.Group controlId="title">
-              <Form.Label>Habit Title</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter title"
-                value={title}
-                autoFocus={true}
-                required={true}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-            </Form.Group>
+      <Modal.Body>
+        <Form onSubmit={AddHabitHandler}> {/* Call AddHabitHandler on form submit */}
+          <Form.Group controlId="title">
+            <Form.Label>Habit Title</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter title"
+              value={title}
+              autoFocus={true}
+              required={true}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </Form.Group>
 
-            <Form.Group controlId="description">
-              <Form.Label>Describe it</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Short description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
-            </Form.Group>
+          <Form.Group controlId="description">
+            <Form.Label>Describe it</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Short description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </Form.Group>
 
-            <Modal.Footer>
-              <Button onClick={AddHabitHandler}>Add Habit</Button>
-            </Modal.Footer>
-          </Form>
-        </Modal.Body>
-      </Modal.Dialog>
+          <Modal.Footer>
+            <Button type="submit">Add Habit</Button> {/* Use submit button */}
+          </Modal.Footer>
+        </Form>
+      </Modal.Body>
     </Modal>
   );
 };
