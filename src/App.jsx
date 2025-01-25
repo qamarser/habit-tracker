@@ -1,13 +1,18 @@
 import { useEffect } from 'react';
 import { Row, Col, Container} from 'react-bootstrap';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header.jsx';
 import Habitdisplays from './components/Habitdisplays.jsx';
 import Overview from "./components/overview.jsx"
 import Typed from 'typed.js';
 import './App.css';
+import Home from './home.jsx';
+import PerformanceChart from './features/performanceChart.jsx';
 
 function App() {
+  const navigate = useNavigate();
+
   // Code for typed.js library
   useEffect(() => {
     const typed = new Typed(".tag", {
@@ -33,9 +38,25 @@ function App() {
 
   return (
     <>
-    <Header />
-    <Container>
-        <Row className='mt-5  habit-name'>
+      <Header />
+      <Routes>
+        <Route
+        path="/"
+        element={
+      <Container>
+        {/* Add the "View Performance" button above the title */}
+        <Row className="mt-3 performance">
+          <Col className="d-flex justify-content-end">
+            <button
+              className="btn btn-primary"
+              onClick={() => navigate('/performance')}
+            >
+              View Performance
+            </button>
+          </Col>
+        </Row>
+
+        <Row className="mt-5 habit-name">
           <Col md={3}>
             <Overview />
           </Col>
@@ -43,13 +64,18 @@ function App() {
             <Habitdisplays />
           </Col>
         </Row>
-        <h4 className='text-light d-flex  mt-5  justify-content-center'>
-          <span className='tag'></span>
+
+        <h4 className="text-light d-flex mt-5 justify-content-center">
+          <span className="tag"></span>
         </h4>
       </Container>
-
+        }
+        /> {/* Define routes */}
+                <Route path="/" element={null} /> {/* Default route (already handled by the UI above) */}
+        <Route path="/performance" element={<PerformanceChart />} /> {/* New chart page */}
+      </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

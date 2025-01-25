@@ -82,3 +82,8 @@
   .habit-name {
     color: #FFFFFF;
   }
+  .btn.btn-primary {
+    background-image: linear-gradient(to left, #EF10D1, whitesmoke); /* Gradient from #EF10D1 to a lighter pink */
+    border-color: #EF10D1; /* Border color matches the start of the gradient */
+    color: black !important; /* Change text color for better contrast */
+}
