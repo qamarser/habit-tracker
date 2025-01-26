@@ -53,16 +53,18 @@ const MonthlyCalendar = () => {
     };
 
     return (
-    <div className="Monthly _Calendar">
+   
+    <div className="container mt-5">
+
+      <h1 className="mb-4 headings">Monthly Calendar </h1>
       <div>
-          <button className="btn btn-secondary mb-4" onClick={() => navigate("/")}>
+      <button className="btn btn-secondary mb-4" onClick={() => navigate("/")}>
         Back to Home
-      </button>
-      <button className="btn btn-secondary mb-4 " onClick={() => navigate("/performance ")}>
+      </button> 
+      <button className="btn btn-secondary mb-4 ms-3" onClick={() => navigate("/performance ")}>
         Back to Preformance 
       </button>
           </div>
-            <h1> Monthly Calendar </h1>
             <div className="container">
                 <div className="calendar-container">
                     <Calendar
@@ -162,6 +164,7 @@ const MonthlyCalendar = () => {
                     )}{" "}
                 </div>{" "}
             </div>{" "}
+
         </div>
     );
 };
