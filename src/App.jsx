@@ -7,7 +7,7 @@ import Habitdisplays from './components/Habitdisplays.jsx';
 import Overview from "./components/overview.jsx"
 import Typed from 'typed.js';
 import './App.css';
-import Home from './home.jsx';
+import Home from './features/home.jsx';
 import PerformanceChart from './Page 2/performanceChart.jsx';
 
 function App() {
