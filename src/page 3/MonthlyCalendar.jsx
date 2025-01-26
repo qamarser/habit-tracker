@@ -3,12 +3,14 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./../App.css"
 
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const MonthlyCalendar = () => {
     const [selectedDate, setSelectedDate] = useState(null);
     const [eventName, setEventName] = useState("");
     const [events, setEvents] = useState([]);
+    const navigate = useNavigate();
+    
 
     const Date_Click_Fun = (date) => {
         setSelectedDate(date);
@@ -56,7 +58,7 @@ const MonthlyCalendar = () => {
           <button className="btn btn-secondary mb-4" onClick={() => navigate("/")}>
         Back to Home
       </button>
-      <button className="btn btn-secondary mb-4 " onClick={() => navigate("/")}>
+      <button className="btn btn-secondary mb-4 " onClick={() => navigate("/performance ")}>
         Back to Preformance 
       </button>
           </div>
