@@ -8,7 +8,7 @@ import Overview from "./components/overview.jsx"
 import Typed from 'typed.js';
 import './App.css';
 import Home from './home.jsx';
-import PerformanceChart from './features/performanceChart.jsx';
+import PerformanceChart from './Page 2/performanceChart.jsx';
 
 function App() {
   const navigate = useNavigate();
