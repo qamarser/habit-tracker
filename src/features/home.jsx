@@ -14,6 +14,13 @@ const Home = () => {
           View Performance
         </button>
       </div>
+      <div className="d-flex justify-content-between align-items-center">
+         <button
+            className="btn btn-secondary"
+            onClick={() => navigate('/MonthlyCalendar')} >
+              Monthly Progress
+         </button>
+      </div>
       {/* Move your existing habit tracker UI here */}
     </div>
   );
