@@ -5,7 +5,7 @@ import "./../App.css"
 
 import { Routes, Route, useNavigate } from 'react-router-dom';
 
-const App = () => {
+const MonthlyCalendar = () => {
     const [selectedDate, setSelectedDate] = useState(null);
     const [eventName, setEventName] = useState("");
     const [events, setEvents] = useState([]);
@@ -164,4 +164,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default MonthlyCalendar;
