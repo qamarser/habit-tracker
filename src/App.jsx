@@ -7,12 +7,13 @@ import Habitdisplays from './components/Habitdisplays.jsx';
 import Overview from "./components/overview.jsx"
 import Typed from 'typed.js';
 import './App.css';
-import Home from './features/home.jsx';
-import PerformanceChart from './Page 2/performanceChart.jsx';
+import Home from './home.jsx';
+import MonthlyCalendar from "./features/MonthlyCalendar.jsx"
+import PerformanceChart from './features/performanceChart.jsx';
 
 function App() {
   const navigate = useNavigate();
-
+  
   // Code for typed.js library
   useEffect(() => {
     const typed = new Typed(".tag", {
@@ -54,6 +55,14 @@ function App() {
               View Performance
             </button>
           </Col>
+          <Col >
+          <button
+              className="btn btn-secondary"
+              onClick={() => navigate('/MonthlyCalendar')}
+            >
+              Monthly Progress
+            </button>
+          </Col>
         </Row>
 
         <Row className="mt-5 habit-name">
@@ -71,8 +80,10 @@ function App() {
       </Container>
         }
         /> {/* Define routes */}
-                <Route path="/" element={null} /> {/* Default route (already handled by the UI above) */}
-        <Route path="/performance" element={<PerformanceChart />} /> {/* New chart page */}
+            <Route path="/" element={null} /> {/* Default route (already handled by the UI above) */}
+            <Route path="/performance" element={<PerformanceChart />} /> {/* New chart page */}
+
+            <Route path='/MonthlyCalendar' element={<MonthlyCalendar />} />
       </Routes>
     </>
   );
