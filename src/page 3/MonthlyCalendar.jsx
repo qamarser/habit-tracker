@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./../App.css"
-import Home from './../home.jsx';
 
 import { Routes, Route, useNavigate } from 'react-router-dom';
 
