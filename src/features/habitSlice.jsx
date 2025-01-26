@@ -10,16 +10,17 @@ export const details = [
   { day: "Sun", status: "none" },
 ];
 
-// Load habits from local storage if available, otherwise set default habit
+// Load habits from local storage if available, otherwise set default habits
 const habitsFromStorage = localStorage.getItem("newHabits")
   ? JSON.parse(localStorage.getItem("newHabits"))
   : [
       {
         title: "Wake Up",
-        description: "wake up at 5:45am",
+        description: "Wake up at 5:45am",
         details,
-        completedDays: 0, // Ensure it's initialized
-        showCongrats: false, // Ensure the congrats flag is initialized
+        completedDays: 0, // Track completed days
+        showCongrats: false, // Prevent repeated popups
+        goalDesired: 21, // Define the goal for habit formation
       },
     ];
 
@@ -52,52 +53,39 @@ const habitSlice = createSlice({
     changeStatus: (state, { payload }) => {
       state.habits.forEach((habit) => {
         if (habit.title === payload.title) {
-          let completedCount = habit.completedDays; // Start with current completedDays count
-          
+          let completedCount = habit.completedDays; // Start with the current count
+
           habit.details.forEach((detail) => {
             if (detail.day === payload.details[0].day) {
               const oldStatus = detail.status; // Save the old status
-              detail.status = payload.details[0].status; // Update the day's status
+              detail.status = payload.details[0].status; // Update the status
 
-              // Only increment completedDays if the status is changed to "done"
+              // Increment completedDays if changing from "none" or "fail" to "done"
               if (detail.status === "done" && oldStatus !== "done") {
-                completedCount++; // Increment if we mark it as "done"
+                completedCount++;
               }
 
-    //           // Do nothing to completedDays if we change it to "none" or "fail"
-    //           // We don't decrement completedDays if the status was previously "done"
-    //         }
-    //       });
+              // Decrement completedDays if changing from "done" to another status
+              if (oldStatus === "done" && detail.status !== "done") {
+                completedCount--;
+              }
+            }
+          });
 
-    //       // Update completedDays without limiting it to 21
-    //       habit.completedDays = completedCount;
+          // Update completedDays and ensure it's synced
+          habit.completedDays = completedCount;
 
-    //       // If the habit reaches 21 days, show congratulations
-    //       habit.showCongrats = habit.completedDays === 21;
-    //     }
-    //   });
+          // Check if goalDesired is reached and update showCongrats
+          if (completedCount === habit.goalDesired && !habit.showCongrats) {
+            habit.showCongrats = true; // Mark congratulations as shown
+          } else if (completedCount !== habit.goalDesired) {
+            habit.showCongrats = false; // Reset if no longer at goal
+          }
+        }
+      });
 
-    //   window.localStorage.setItem("newHabits", JSON.stringify(state.habits));
-    // },
-         // Decrement completedDays only if changing from "done" to another status
-         
-      }
-    });
-
-    habit.completedDays = completedCount;
-
-    // Show congrats only when completedDays reaches exactly 21
-    if (completedCount === 21 && !habit.showCongrats) {
-      alert("Congratulations, you formed a habit!");
-      habit.showCongrats = true;
-    } else if (completedCount !== 21) {
-      habit.showCongrats = false; // Reset if not at 21
-    }
-  }
-});
-
-window.localStorage.setItem("newHabits", JSON.stringify(state.habits));
-},
+      window.localStorage.setItem("newHabits", JSON.stringify(state.habits));
+    },
   },
 });
 

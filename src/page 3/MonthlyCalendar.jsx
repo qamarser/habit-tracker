@@ -1,172 +1,131 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import "./../App.css"
-
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const MonthlyCalendar = () => {
-    const [selectedDate, setSelectedDate] = useState(null);
-    const [eventName, setEventName] = useState("");
-    const [events, setEvents] = useState([]);
-    const navigate = useNavigate();
-    
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [eventName, setEventName] = useState("");
+  const [events, setEvents] = useState(() => {
+    const storedEvents = localStorage.getItem("calendarEvents");
+    if (storedEvents) {
+      return JSON.parse(storedEvents);
+    }
+    return []; // Return empty array if no events are stored
+  });
+  const navigate = useNavigate();
 
-    const Date_Click_Fun = (date) => {
-        setSelectedDate(date);
-    };
+  // Save events to localStorage whenever events change
+  useEffect(() => {
+    localStorage.setItem("calendarEvents", JSON.stringify(events));
+  }, [events]);
 
-    const Event_Data_Update = (event) => {
-        setEventName(event.target.value);
-    };
+  const handleDateClick = (date) => {
+    setSelectedDate(date);
+  };
 
-    const Create_Event_Fun = () => {
-        if (selectedDate && eventName) {
-            const newEvent = {
-                id: new Date().getTime(),
-                date: selectedDate,
-                title: eventName,
-            };
-            setEvents([...events, newEvent]);
-            setSelectedDate(null);
-            setEventName("");
-            setSelectedDate(newEvent.date);
-        }
-    };
+  const handleEventInput = (e) => {
+    setEventName(e.target.value);
+  };
 
-    const Update_Event_Fun = (eventId, newName) => {
-        const updated_Events = events.map((event) => {
-            if (event.id === eventId) {
-                return {
-                    ...event,
-                    title: newName,
-                };
-            }
-            return event;
-        });
-        setEvents(updated_Events);
-    };
+  const addEvent = () => {
+    if (selectedDate && eventName) {
+      const newEvent = {
+        id: new Date().getTime(),
+        date: selectedDate,
+        title: eventName,
+      };
+      setEvents([...events, newEvent]);
+      setEventName("");
+    }
+  };
 
-    const Delete_Event_Fun = (eventId) => {
-        const updated_Events = events.filter((event) => event.id !== eventId);
-        setEvents(updated_Events);
-    };
-
-    return (
-   
-    <div className="container mt-5">
-
-      <h1 className="mb-4 headings">Monthly Calendar </h1>
-      <div>
-      <button className="btn btn-secondary mb-4" onClick={() => navigate("/")}>
-        Back to Home
-      </button> 
-      <button className="btn btn-secondary mb-4 ms-3" onClick={() => navigate("/performance ")}>
-        Back to Preformance 
-      </button>
-          </div>
-            <div className="container">
-                <div className="calendar-container">
-                    <Calendar
-                        value={selectedDate}
-                        onClickDay={Date_Click_Fun}
-                        tileClassName={({ date }) =>
-                            selectedDate &&
-                            date.toDateString() === selectedDate.toDateString()
-                                ? "selected"
-                                : events.some(
-                                      (event) =>
-                                          event.date.toDateString() ===
-                                          date.toDateString(),
-                                  )
-                                ? "event-marked"
-                                : ""
-                        }
-                    />{" "}
-                </div>
-                <div className="event-container">
-                    {" "}
-                    {selectedDate && (
-                        <div className="event-form">
-                            <h2> Create Event </h2>{" "}
-                            <p>
-                                {" "}
-                                Selected Date: {selectedDate.toDateString()}{" "}
-                            </p>{" "}
-                            <input
-                                type="text"
-                                placeholder="Event Name"
-                                value={eventName}
-                                onChange={Event_Data_Update}
-                            />{" "}
-                            <button
-                                className="create-btn"
-                                onClick={Create_Event_Fun}
-                            >
-                                Click Here to Add Event{" "}
-                            </button>{" "}
-                        </div>
-                    )}
-                    {events.length > 0 && selectedDate && (
-                        <div className="event-list">
-                            <h2> My Created Event List </h2>{" "}
-                            <div className="event-cards">
-                                {" "}
-                                {events.map((event) =>
-                                    event.date.toDateString() ===
-                                    selectedDate.toDateString() ? (
-                                        <div
-                                            key={event.id}
-                                            className="event-card"
-                                        >
-                                            <div className="event-card-header">
-                                                <span className="event-date">
-                                                    {" "}
-                                                    {event.date.toDateString()}{" "}
-                                                </span>{" "}
-                                                <div className="event-actions">
-                                                    <button
-                                                        className="update-btn"
-                                                        onClick={() =>
-                                                            Update_Event_Fun(
-                                                                event.id,
-                                                                prompt(
-                                                                    "ENTER NEW TITLE",
-                                                                ),
-                                                            )
-                                                        }
-                                                    >
-                                                        Update Event{" "}
-                                                    </button>{" "}
-                                                    <button
-                                                        className="delete-btn"
-                                                        onClick={() =>
-                                                            Delete_Event_Fun(
-                                                                event.id,
-                                                            )
-                                                        }
-                                                    >
-                                                        Delete Event{" "}
-                                                    </button>{" "}
-                                                </div>{" "}
-                                            </div>{" "}
-                                            <div className="event-card-body">
-                                                <p className="event-title">
-                                                    {" "}
-                                                    {event.title}{" "}
-                                                </p>{" "}
-                                            </div>{" "}
-                                        </div>
-                                    ) : null,
-                                )}{" "}
-                            </div>{" "}
-                        </div>
-                    )}{" "}
-                </div>{" "}
-            </div>{" "}
-
-        </div>
+  const updateEvent = (eventId, newTitle) => {
+    setEvents((prevEvents) =>
+      prevEvents.map((event) =>
+        event.id === eventId ? { ...event, title: newTitle } : event
+      )
     );
-};
+  };
+
+  const deleteEvent = (eventId) => {
+    setEvents((prevEvents) => prevEvents.filter((event) => event.id !== eventId));
+  };
+
+  return (
+    <div className="container mt-5 d-flex flex-column align-items-center">
+              {/* Navigation Buttons */}
+      <div className="text-center mb-4">
+        <button className="btn btn-secondary" onClick={() => navigate("/")}>
+          Back to Home
+        </button>
+        <button className="btn btn-secondary ms-3" onClick={() => navigate("/performance")}>
+          View Performance
+        </button>
+      </div>
+  
+      {/* Page Title */}
+      <h1 className="mb-4 headings text-center">Monthly Calendar</h1>
+  
+
+      {/* Calendar */}
+      <div className="calendar-container mb-5">
+        <Calendar
+          value={selectedDate}
+          onClickDay={handleDateClick}
+          tileClassName={({ date }) =>
+            events.some((event) => new Date(event.date).toDateString() === date.toDateString())
+              ? "event-marked"
+              : ""
+          }
+        />
+      </div>
+  
+      {/* Create Event Section */}
+      {selectedDate && (
+        <div className="event-form mb-4 text-center">
+          <h2 className="mt-2 mb-4 headings">Create Event</h2>
+          <p className="text-white">Selected Date: {selectedDate.toDateString()}</p>
+          <input
+            type="text"
+            placeholder="Event Name"
+            value={eventName}
+            onChange={handleEventInput}
+            className="form-control"
+            style={{ maxWidth: '300px', margin: '0 auto' }} // Center input field
+          />
+          <button className="btn btn-primary mt-3" onClick={addEvent}>
+            Add Event
+          </button>
+        </div>
+      )}
+  
+      {/* Event List */}
+      {events.length > 0 && (
+        <div className="event-list text-center">
+          <h2 className="mt-2 mb-4 headings">My Events</h2>
+          {events.map((event) => (
+            <div key={event.id} className="event-card mb-3">
+              <span className="text-white">{new Date(event.date).toDateString()}</span>
+              <span className="text-white ms-3">{event.title}</span>
+              <button
+                className="btn btn-sm btn-secondary ms-3"
+                onClick={() => updateEvent(event.id, prompt("Enter new title", event.title))}
+              >
+                Update
+              </button>
+              <button
+                className="btn btn-sm btn-danger ms-2"
+                onClick={() => deleteEvent(event.id)}
+              >
+                Delete
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}  
 
 export default MonthlyCalendar;
