@@ -51,7 +51,7 @@ function App() {
               className="btn btn-primary"
               onClick={() => navigate('/performance')}
             >
-              View Performance
+              Performance
             </button>
           </Col>
           <Col >
@@ -59,7 +59,7 @@ function App() {
               className="btn btn-secondary"
               onClick={() => navigate('/MonthlyCalendar')}
             >
-              Monthly Progress
+              Calendar  
             </button>
           </Col>
         </Row>
