@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import "./../App.css"
+import Home from './../home.jsx';
 
+import { Routes, Route, useNavigate } from 'react-router-dom';
 
 const App = () => {
     const [selectedDate, setSelectedDate] = useState(null);
@@ -49,7 +52,15 @@ const App = () => {
     };
 
     return (
-        <div className="Monthly _Calendar">
+    <div className="Monthly _Calendar">
+      <div>
+          <button className="btn btn-secondary mb-4" onClick={() => navigate("/")}>
+        Back to Home
+      </button>
+      <button className="btn btn-secondary mb-4 " onClick={() => navigate("/")}>
+        Back to Preformance 
+      </button>
+          </div>
             <h1> Monthly Calendar </h1>
             <div className="container">
                 <div className="calendar-container">
