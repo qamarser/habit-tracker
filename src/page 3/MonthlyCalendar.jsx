@@ -53,32 +53,33 @@ const MonthlyCalendar = () => {
   };
 
   return (
-    <div className="container mt-5 d-flex flex-column align-items-center">
-              {/* Navigation Buttons */}
-      <div className="text-center mb-4">
-        <button className="btn btn-secondary" onClick={() => navigate("/")}>
-          Back to Home
-        </button>
-        <button className="btn btn-secondary ms-3" onClick={() => navigate("/performance")}>
-          View Performance
-        </button>
-      </div>
-  
+    <div className="container mt-5">
       {/* Page Title */}
       <h1 className="mb-4 headings text-center">Monthly Calendar</h1>
   
-
-      {/* Calendar */}
-      <div className="calendar-container mb-5">
-        <Calendar
-          value={selectedDate}
-          onClickDay={handleDateClick}
-          tileClassName={({ date }) =>
-            events.some((event) => new Date(event.date).toDateString() === date.toDateString())
-              ? "event-marked"
-              : ""
-          }
-        />
+      {/* Navigation Buttons */}
+      <div className="d-flex justify-content-between mb-4">
+        <button className="btn btn-secondary" onClick={() => navigate("/performance")}>
+          View Performance
+        </button>
+        <button className="btn btn-secondary" onClick={() => navigate("/")}>
+          Back to Home
+        </button>
+      </div>
+  
+      {/* Centered Calendar */}
+      <div className="d-flex justify-content-center mb-5">
+        <div className="calendar-container">
+          <Calendar
+            value={selectedDate}
+            onClickDay={handleDateClick}
+            tileClassName={({ date }) =>
+              events.some((event) => new Date(event.date).toDateString() === date.toDateString())
+                ? "event-marked"
+                : ""
+            }
+          />
+        </div>
       </div>
   
       {/* Create Event Section */}
@@ -126,6 +127,8 @@ const MonthlyCalendar = () => {
       )}
     </div>
   );
+  
+  
 }  
 
 export default MonthlyCalendar;
