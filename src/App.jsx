@@ -80,8 +80,10 @@ function App() {
       </Container>
         }
         /> {/* Define routes */}
-                <Route path="/" element={null} /> {/* Default route (already handled by the UI above) */}
-        <Route path="/performance" element={<PerformanceChart />} /> {/* New chart page */}
+            <Route path="/" element={null} /> {/* Default route (already handled by the UI above) */}
+            <Route path="/performance" element={<PerformanceChart />} /> {/* New chart page */}
+
+            <Route path='/MonthlyCalendar' element={<MonthlyCalendar />} />
       </Routes>
     </>
   );
