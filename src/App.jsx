@@ -8,11 +8,12 @@ import Overview from "./components/overview.jsx"
 import Typed from 'typed.js';
 import './App.css';
 import Home from './home.jsx';
+import MonthlyCalendar from "./features/MonthlyCalendar.jsx"
 import PerformanceChart from './features/performanceChart.jsx';
 
 function App() {
   const navigate = useNavigate();
-
+  
   // Code for typed.js library
   useEffect(() => {
     const typed = new Typed(".tag", {
@@ -52,6 +53,14 @@ function App() {
               onClick={() => navigate('/performance')}
             >
               View Performance
+            </button>
+          </Col>
+          <Col >
+          <button
+              className="btn btn-secondary"
+              onClick={() => navigate('/MonthlyCalendar')}
+            >
+              Monthly Progress
             </button>
           </Col>
         </Row>
