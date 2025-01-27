@@ -4,6 +4,14 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   server: {
-    historyApiFallback: true, // Add this line
+    open: true, // Optional: Automatically opens the browser
+  },
+  build: {
+    outDir: 'dist',
+  },
+  resolve: {
+    alias: {
+      '@': '/src',
+    },
   },
 });

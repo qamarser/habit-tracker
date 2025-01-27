@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Row, Col, Container} from 'react-bootstrap';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header.jsx';
 import Habitdisplays from './components/Habitdisplays.jsx';
@@ -83,6 +83,7 @@ function App() {
             <Route path="/performance" element={<PerformanceChart />} /> {/* New chart page */}
 
             <Route path='/MonthlyCalendar' element={<MonthlyCalendar />} />
+            
       </Routes>
     </>
   );

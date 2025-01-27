@@ -2,14 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Track daily habits and grow in life healthier and wiser"
-    />
-    
+    <meta name="description" content="Track daily habits and grow in life healthier and wiser" />
 
     <link
       rel="stylesheet"
@@ -24,15 +19,26 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+    <!-- Fallback route handling for SPAs -->
+    <script type="module">
+      // This script ensures proper routing for Vite in development and production.
+      if (!window.location.origin.includes('localhost')) {
+        const origin = window.location.origin;
+        const pathname = window.location.pathname;
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+        // Check if the file exists on the server
+        fetch(pathname, { method: 'HEAD' })
+          .then((res) => {
+            if (!res.ok) {
+              // Redirect to the root for non-existing files
+              window.location.href = origin;
+            }
+          })
+          .catch(() => {
+            window.location.href = origin; // Fallback in case of network errors
+          });
+      }
+    </script>
   </body>
 </html>
