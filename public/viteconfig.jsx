@@ -4,14 +4,15 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   server: {
-    open: true, // Optional: Automatically opens the browser
+    open: true, // Automatically opens the browser
   },
   build: {
-    outDir: 'dist',
+    outDir: 'dist', // Output directory
   },
   resolve: {
     alias: {
       '@': '/src',
     },
   },
+  base: '/habit-tracker/', // Replace <repository-name> with the name of your GitHub repository
 });

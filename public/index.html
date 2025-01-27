@@ -6,6 +6,7 @@
     <meta name="theme-color" content="#000000" />
     <meta name="description" content="Track daily habits and grow in life healthier and wiser" />
 
+    <!-- Font Awesome for Icons -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
@@ -17,26 +18,31 @@
     <title>Loop Habit Tracker</title>
   </head>
   <body>
+    <!-- Display message if JavaScript is disabled -->
     <noscript>You need to enable JavaScript to run this app.</noscript>
+
+    <!-- Root element for React -->
     <div id="root"></div>
 
-    <!-- Fallback route handling for SPAs -->
+    <!-- Main script for Vite (entry to React app) -->
+    <script type="module" src="/src/Main.jsx"></script> <!-- Ensure this is correct -->
+
+    <!-- Optional: Fallback routing for SPAs (Single Page Applications) -->
     <script type="module">
-      // This script ensures proper routing for Vite in development and production.
-      if (!window.location.origin.includes('localhost')) {
+      // Fallback to root in production for non-existing files
+      if (!window.location.origin.includes("localhost")) {
         const origin = window.location.origin;
         const pathname = window.location.pathname;
 
-        // Check if the file exists on the server
-        fetch(pathname, { method: 'HEAD' })
+        fetch(pathname, { method: "HEAD" })
           .then((res) => {
             if (!res.ok) {
-              // Redirect to the root for non-existing files
+              // Redirect to root if file doesn't exist
               window.location.href = origin;
             }
           })
           .catch(() => {
-            window.location.href = origin; // Fallback in case of network errors
+            window.location.href = origin; // Handle network errors gracefully
           });
       }
     </script>
