@@ -7,7 +7,7 @@ import Habitdisplays from './components/Habitdisplays.jsx';
 import Overview from './components/overview.jsx';
 import Typed from 'typed.js';
 import './App.css';
-import MonthlyCalendar from "./Page 3/MonthlyCalendar.jsx";
+import MonthlyCalendar from "./page 3/MonthlyCalendar.jsx";
 import PerformanceChart from './Page 2/performanceChart.jsx';
 
 function App() {
