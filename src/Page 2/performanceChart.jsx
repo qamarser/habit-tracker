@@ -1,9 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid, ResponsiveContainer } from "recharts";
 import { useNavigate } from "react-router-dom";
-import { createSelector } from 'reselect';
-import LinearChart from "./LinearChart"
+import { createSelector } from "reselect";
+import LinearChart from "./LinearChart";
 
 // Memoized selector to avoid unnecessary re-renders
 const selectHabits = (state) => state.allHabits.habits;
@@ -32,24 +32,26 @@ const PerformanceChart = () => {
 
   return (
     <div>
-    <div className="container mt-5">
-      <button className="btn btn-secondary mb-4" onClick={() => navigate("/")}>
-        Back to Home
-      </button>
-      <h1 className="mb-4 headings">Habit Performance</h1>
-      <div className="chart-container">
-        <BarChart width={800} height={400} data={chartData}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="goalDesired" fill="#8884d8" name="Goal Desired" />
-          <Bar dataKey="goalReached" fill="#82ca9d" name="Goal Reached" />
-        </BarChart>
+      <div className="container mt-5">
+        <button className="btn btn-secondary mb-4" onClick={() => navigate("/")}>
+          Back to Home
+        </button>
+        <h1 className="mb-4 headings">Habit Performance</h1>
+        <div className="chart-container">
+          <ResponsiveContainer width="100%" height={400}>
+            <BarChart data={chartData}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="goalDesired" fill="#8884d8" name="Goal Desired" />
+              <Bar dataKey="goalReached" fill="#82ca9d" name="Goal Reached" />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
       </div>
-    </div>
-    <LinearChart/>
+      <LinearChart />
     </div>
   );
 };
